@@ -5,7 +5,7 @@ import AddIcon from '../assets/add.png'
 const AddButtion = () => {
   return (
     <div>
-        <Link to='/note/new' className='floating-button'>
+        <Link to='/note/id' className='floating-button'>
             <img src={AddIcon} alt="image" />
         </Link>
     </div>

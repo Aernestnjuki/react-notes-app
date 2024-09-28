@@ -15,18 +15,22 @@ const NotePage = () => {
         getNote()
     }, [id])
 
+
+    // get a note by its id
     const getNote = async () => {
 
-       if (id === 'new') return
+        // if (id === 'id') return
         const response = await fetch(`http://localhost:3000/notes/${id}`)
         const data = await response.json()
         console.log("data:", data)
         setNote(data)
     }
 
+
+    // Create a note
     const createNote = async () => {
         console.log("create note")
-        await fetch(`http://localhost:3000/notes/${id}`, {
+        await fetch(`http://localhost:3000/notes/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -36,6 +40,7 @@ const NotePage = () => {
     }
 
 
+    // update a note
     const updateNote = async () => {
         await fetch(`http://localhost:3000/notes/${id}`, {
             method: 'PUT',
@@ -46,12 +51,14 @@ const NotePage = () => {
         })
     }
 
+
+    // conditional function to handle delete, update and create
     const handleSubmit = () => {
-        if (id !== 'new' && !note.body) {
+        if (id !== 'id' && !note.body) {
             deleteNote()
-        } else if (id !== 'new') {
+        } else if (id !== 'id') {
             updateNote()
-        } else if (id === 'new' && note !== null) {
+        } else if (id === 'id' && note !== null) {
             createNote()
         }
         
@@ -82,10 +89,14 @@ const NotePage = () => {
                     <img src={ArrowLeft} alt="image" onClick={handleSubmit}/>
                 </Link>
             </h3>
-            {id !== 'new' ? (
-                <button onClick={deleteNote}>Delete</button>
+            {id !== 'id' ? (
+                <Link to='/'>
+                    <button onClick={deleteNote}>Delete</button>
+                </Link>
             ) : (
-                <button onClick={createNote}>Done</button>
+                <Link to='/'>
+                    <button onClick={handleSubmit}>Done</button>
+                </Link>
             )}
             
         </div>
