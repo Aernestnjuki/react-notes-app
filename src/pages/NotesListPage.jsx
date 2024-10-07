@@ -12,7 +12,8 @@ const NotesListPage = () => {
     }, [])
 
     const getNotes = async () => {
-        const response = await fetch("http://localhost:3000/notes")
+        // const response = await fetch("http://localhost:3000/notes") // this is for the json-server api in the package.json
+        const response = await fetch("http://127.0.0.1:8000/api/notes/") // this is coming from django api
         const data = await response.json()
         console.log(data)
         setNotes(data)

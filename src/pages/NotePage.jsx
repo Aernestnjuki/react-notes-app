@@ -19,8 +19,9 @@ const NotePage = () => {
     // get a note by its id
     const getNote = async () => {
 
-        // if (id === 'id') return
-        const response = await fetch(`http://localhost:3000/notes/${id}`)
+        if (id === 'id') return
+        // const response = await fetch(`http://localhost:3000/notes/${id}`) // json-server local api
+        const response = await fetch(`http://127.0.0.1:8000/api/notes/${id}`)
         const data = await response.json()
         console.log("data:", data)
         setNote(data)
@@ -29,25 +30,25 @@ const NotePage = () => {
 
     // Create a note
     const createNote = async () => {
-        console.log("create note")
-        await fetch(`http://localhost:3000/notes/`, {
+        await fetch("http://127.0.0.1:8000/api/notes/create/", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({...note, 'updated': new Date()})
+            body: JSON.stringify(note)
         })
     }
 
 
     // update a note
     const updateNote = async () => {
-        await fetch(`http://localhost:3000/notes/${id}`, {
+        await fetch(`http://127.0.0.1:8000/api/notes/${id}/update/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({...note, 'updated': new Date()})
+            body: JSON.stringify(note)
+            //body: JSON.stringify({...note, 'updated': new Date()})
         })
     }
 
@@ -66,12 +67,12 @@ const NotePage = () => {
 
 
     const deleteNote = async () => {
-        await fetch(`http://localhost:3000/notes/${id}`, {
+        await fetch(`http://127.0.0.1:8000/api/notes/${id}/delete/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(note)
+            }
+            // body: JSON.stringify(note)
         })
     }
 
